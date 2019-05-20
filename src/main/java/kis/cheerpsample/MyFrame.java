@@ -5,7 +5,15 @@
  */
 package kis.cheerpsample;
 
+import java.awt.Color;
+import java.awt.EventQueue;
+import java.awt.Graphics2D;
+import java.awt.geom.AffineTransform;
+import java.awt.image.BufferedImage;
 import java.time.LocalDateTime;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.ImageIcon;
 
 /**
  *
@@ -18,8 +26,29 @@ public class MyFrame extends javax.swing.JFrame {
      */
     public MyFrame() {
         initComponents();
+        jLabel1.setIcon(new ImageIcon(img));
+        jLabel1.setText("");
+        new Thread(() -> {
+            for (int r = 0; r < 360; r = (r + 1) % 360) {
+                Graphics2D g = img.createGraphics();
+                g.setColor(Color.WHITE);
+                g.fillRect(0, 0, 500, 300);
+                AffineTransform trans = AffineTransform.getRotateInstance((r / 180.) * Math.PI, 250, 150);
+                g.setTransform(trans);
+                g.setColor(Color.BLUE);
+                g.fillRect(100, 100, 300, 100);
+                g.dispose();
+                //System.out.println(r);
+                EventQueue.invokeLater(jLabel1::repaint);
+                try {
+                    Thread.sleep(50);
+                } catch (InterruptedException ex) {
+                }
+            }
+        }).start();
+        
     }
-
+    BufferedImage img = new BufferedImage(500, 300, BufferedImage.TYPE_INT_RGB);
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
