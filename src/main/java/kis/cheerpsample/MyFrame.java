@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package kis.cheerpsample;
 
 import java.awt.Color;
@@ -17,7 +13,7 @@ import javax.swing.ImageIcon;
 
 /**
  *
- * @author ST20197
+ * @author kishida
  */
 public class MyFrame extends javax.swing.JFrame {
 
